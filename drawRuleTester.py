@@ -7,7 +7,7 @@ def nonPawnMaterial(board):
     return 2+len(board.pieces(chess.QUEEN,chess.WHITE))+len(board.pieces(chess.ROOK,chess.WHITE))+len(board.pieces(chess.BISHOP,chess.WHITE))+len(board.pieces(chess.KNIGHT,chess.WHITE))+len(board.pieces(chess.QUEEN,chess.BLACK))+len(board.pieces(chess.ROOK,chess.BLACK))+len(board.pieces(chess.BISHOP,chess.BLACK))+len(board.pieces(chess.KNIGHT,chess.BLACK))
 
 def pawnMaterial(board):
-    return len(board.pieces(chess.PAWN,chess.BLACK))+len(board.pieces(chess.PAWN,chess.BLACK))
+    return len(board.pieces(chess.PAWN,chess.WHITE))+len(board.pieces(chess.PAWN,chess.BLACK))
 
 def parseEval(comment):
 
