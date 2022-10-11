@@ -9,48 +9,13 @@ isTCECEval=False
 
 drawRules=[]
 '''
-drawRules.append(drawRuleTester.drawRule(eval=0.10))
-drawRules.append(drawRuleTester.drawRule(eval=0.15))
-drawRules.append(drawRuleTester.drawRule(eval=0.20))
-drawRules.append(drawRuleTester.drawRule(eval=0.25))
-drawRules.append(drawRuleTester.drawRule(reset=False,eval=0.10))
-drawRules.append(drawRuleTester.drawRule(reset=False,eval=0.15))
-drawRules.append(drawRuleTester.drawRule(reset=False,eval=0.20))
-drawRules.append(drawRuleTester.drawRule(reset=False,eval=0.25))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,reset=False,eval=0.10,maxTotalMaterial=16))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,reset=False,eval=0.15,maxTotalMaterial=16))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,reset=False,eval=0.20,maxTotalMaterial=16))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,reset=False,eval=0.25,maxTotalMaterial=16))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,reset=False,eval=0.10,maxNonPawnMaterial=10,maxPawnMaterial=6))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,reset=False,eval=0.15,maxNonPawnMaterial=10,maxPawnMaterial=6))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,reset=False,eval=0.20,maxNonPawnMaterial=10,maxPawnMaterial=6))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,reset=False,eval=0.25,maxNonPawnMaterial=10,maxPawnMaterial=6))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,reset=False,eval=0.10,maxNonPawnMaterial=10,maxPawnMaterial=8))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,reset=False,eval=0.15,maxNonPawnMaterial=10,maxPawnMaterial=8))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,reset=False,eval=0.20,maxNonPawnMaterial=10,maxPawnMaterial=8))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,reset=False,eval=0.25,maxNonPawnMaterial=10,maxPawnMaterial=8))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,nPlies=12,reset=False,eval=0.10,maxNonPawnMaterial=8,maxPawnMaterial=8))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,nPlies=12,reset=False,eval=0.15,maxNonPawnMaterial=8,maxPawnMaterial=8))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,nPlies=12,reset=False,eval=0.20,maxNonPawnMaterial=8,maxPawnMaterial=8))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,nPlies=12,reset=False,eval=0.25,maxNonPawnMaterial=8,maxPawnMaterial=8))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,nPlies=14,reset=False,eval=0.10,maxNonPawnMaterial=8,maxPawnMaterial=8))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,nPlies=14,reset=False,eval=0.15,maxNonPawnMaterial=8,maxPawnMaterial=8))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,nPlies=14,reset=False,eval=0.20,maxNonPawnMaterial=8,maxPawnMaterial=8))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,nPlies=14,reset=False,eval=0.25,maxNonPawnMaterial=8,maxPawnMaterial=8))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,nPlies=10,reset=False,eval=0.10,maxTotalMaterial=16,maxNonPawnMaterial=8))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,nPlies=10,reset=False,eval=0.15,maxTotalMaterial=16,maxNonPawnMaterial=8))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,nPlies=10,reset=False,eval=0.20,maxTotalMaterial=16,maxNonPawnMaterial=8))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,nPlies=10,reset=False,eval=0.25,maxTotalMaterial=16,maxNonPawnMaterial=8))
+
 '''
-drawRules.append(drawRuleTester.drawRule(eval=0.15))
-#drawRules.append(drawRuleTester.drawRule(eval=0.15,nPlies=12))
-#drawRules.append(drawRuleTester.drawRule(eval=0.15,nPlies=20))
+
+drawRules.append(drawRuleTester.drawRule(eval=0.25,maxNonPawnMaterial=8,maxPawnMaterial=8,nPlies=10)) #Current default draw rule
+drawRules.append(drawRuleTester.drawRule(eval=0.25,maxWeightedMaterial=30,nPlies=6))
 
 
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,nPlies=8,reset=False,eval=0.20,maxNonPawnMaterial=7,maxPawnMaterial=7))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,nPlies=6,reset=False,eval=0.20,maxNonPawnMaterial=7,maxPawnMaterial=7))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,nPlies=8,reset=False,eval=0.20,maxNonPawnMaterial=6,maxPawnMaterial=6))
-drawRules.append(drawRuleTester.drawRule(minMoveNumber=0,nPlies=6,reset=False,eval=0.20,maxNonPawnMaterial=6,maxPawnMaterial=6))
 
 
 
@@ -127,8 +92,8 @@ correctlyTriggered=np.array(correctlyTriggered)
 refRuleTriggered=correctlyTriggered[:,0].reshape((correctlyTriggered.shape[0],1))
 triggeredBeforeDrawRule=refRuleTriggered*correctlyTriggered
 triggeredAlone=(1-refRuleTriggered)*correctlyTriggered
-drawsByDrawRule=np.sum(refRuleTriggered)
-otherDraws=draws-drawsByDrawRule
+#drawsByDrawRule=np.sum(refRuleTriggered)
+#otherDraws=draws-drawsByDrawRule
 
 print(games)
 #print(badData+crash+wins+draws)

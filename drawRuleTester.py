@@ -1,6 +1,5 @@
 import chess.pgn
 import numpy as np
-import math
 
 
 def nonPawnMaterial(board):
@@ -8,6 +7,9 @@ def nonPawnMaterial(board):
 
 def pawnMaterial(board):
     return len(board.pieces(chess.PAWN,chess.WHITE))+len(board.pieces(chess.PAWN,chess.BLACK))
+
+def weightedMaterial(board):
+    return 9*(len(board.pieces(chess.QUEEN,chess.WHITE))+len(board.pieces(chess.QUEEN,chess.BLACK)))+5*(len(board.pieces(chess.ROOK,chess.WHITE))+len(board.pieces(chess.ROOK,chess.BLACK)))+3*(len(board.pieces(chess.BISHOP,chess.WHITE))+len(board.pieces(chess.KNIGHT,chess.WHITE))+len(board.pieces(chess.BISHOP,chess.BLACK))+len(board.pieces(chess.KNIGHT,chess.BLACK)))+len(board.pieces(chess.PAWN,chess.WHITE))+len(board.pieces(chess.PAWN,chess.BLACK))
 
 def parseEval(comment):
 
@@ -38,7 +40,7 @@ def parseEvalTCEC(comment):
 
 
 class drawRule:
-    def __init__(self,reset=True,minMoveNumber=35,nPlies=10,maxNonPawnMaterial=32,maxPawnMaterial=16,maxTotalMaterial=32,eval=0.15,asymetric=False):
+    def __init__(self,reset=True,minMoveNumber=0,nPlies=10,maxNonPawnMaterial=32,maxPawnMaterial=16,maxTotalMaterial=32,maxWeightedMaterial=206,eval=0.20,asymetric=False):
         self.reset=reset
         self.minMoveNumber=minMoveNumber
         self.nPlies=nPlies
@@ -47,6 +49,7 @@ class drawRule:
         self.maxTotalMaterial=maxTotalMaterial
         self.eval=eval
         self.asymetric=asymetric
+        self.maxWeightedMaterial=maxWeightedMaterial
 
 
 
@@ -61,6 +64,7 @@ class Visitor(chess.pgn.BaseVisitor):
         self.maxNonPawnMaterial=np.array([d.maxNonPawnMaterial for d in drawRules])
         self.maxPawnMaterial = np.array([d.maxPawnMaterial for d in drawRules])
         self.maxTotalMaterial=np.array([d.maxTotalMaterial for d in drawRules])
+        self.maxWeightedMaterial=np.array([d.maxWeightedMaterial for d in drawRules])
         self.eval=np.array([d.eval for d in drawRules])
         self.isTCECEval=isTCECEval
         self.asymetric=np.array([d.asymetric for d in drawRules])
@@ -116,7 +120,8 @@ class Visitor(chess.pgn.BaseVisitor):
             nonPawnMat=nonPawnMaterial(board)
             pawnMat=pawnMaterial(board)
             totalMat=nonPawnMat+pawnMat
-            self.materialCondition=(pawnMat<=self.maxPawnMaterial)*(nonPawnMat<=self.maxNonPawnMaterial) *(totalMat<=self.maxTotalMaterial)
+            weightedMat=weightedMaterial(board)
+            self.materialCondition=(pawnMat<=self.maxPawnMaterial)*(nonPawnMat<=self.maxNonPawnMaterial) *(totalMat<=self.maxTotalMaterial)*(weightedMat<=self.maxWeightedMaterial)
 
 
 
